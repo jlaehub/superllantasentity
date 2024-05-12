@@ -1,0 +1,57 @@
+﻿@model superllantasEntity.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Nuevo Cliente</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerType" class="control-label"></label>
+                <input asp-for="CustomerType" class="form-control" />
+                <span asp-validation-for="CustomerType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialDiscount" class="control-label"></label>
+                <input asp-for="SpecialDiscount" class="form-control" />
+                <span asp-validation-for="SpecialDiscount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesAdvisorId" class="control-label"></label>
+                <select asp-for="SalesAdvisorId" class ="form-control" asp-items="ViewBag.SalesAdvisorId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

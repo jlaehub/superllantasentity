@@ -1,0 +1,59 @@
+﻿@model IEnumerable<superllantasEntity.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Producto
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Precio NETO
+            </th>
+            <th>
+                Precio IVA
+            </th>
+            <th>
+                Sucursal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WithholdingTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Actualizar</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductId">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Eliminiar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

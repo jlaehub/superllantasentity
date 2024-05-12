@@ -1,0 +1,83 @@
+﻿@model IEnumerable<superllantasEntity.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Clientes</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo de Cliente
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+               Corre
+            </th>
+            <th>
+               Telefono
+            </th>
+            <th>
+                Descuento
+            </th>
+            <th>
+                Asesor de venta
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @{
+                        string customerTypeInSpanish = "";
+
+                        if (item.CustomerType == "generalPublic")
+                        {
+                            customerTypeInSpanish = "Público General";
+                        }
+                        else if (item.CustomerType == "preferred")
+                        {
+                            customerTypeInSpanish = "Preferencial";
+                        }
+                        else if (item.CustomerType == "corporate")
+                        {
+                            customerTypeInSpanish = "Empresarial";
+                        }
+
+                        @Html.DisplayFor(modelItem => customerTypeInSpanish)
+                    }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialDiscount)
+            </td>
+          <td>
+             @Html.DisplayFor(modelItem => item.SalesAdvisor.Name) @Html.DisplayFor(modelItem => item.SalesAdvisor.LastName)
+        </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">Actualizarar</a> 
+                <a asp-action="Details" asp-route-id="@item.CustomerId">Datalles</a> 
+                <a asp-action="Delete" asp-route-id="@item.CustomerId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

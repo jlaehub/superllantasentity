@@ -1,0 +1,75 @@
+﻿@model IEnumerable<superllantasEntity.Models.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ventas</h1>
+
+<p>
+    <a asp-action="Create">Crear Nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo de Venta
+            </th>
+            <th>
+                Descuento
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Sucursal
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @{
+                        string saleTypeSpanish = "";
+
+                        if (item.SaleType == "credit")
+                        {
+                            saleTypeSpanish = "Credito";
+                        }
+                        else if (item.SaleType == "cash")
+                        {
+                            saleTypeSpanish = "Contado";
+                        }
+                        
+
+                        @Html.DisplayFor(modelItem => saleTypeSpanish)
+                    }
+            
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TemporaryDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Branch.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SaleId">Actualizar</a> |
+                <a asp-action="Details" asp-route-id="@item.SaleId">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.SaleId">Eliminiar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

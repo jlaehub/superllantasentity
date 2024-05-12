@@ -1,0 +1,79 @@
+﻿@model IEnumerable<superllantasEntity.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Correo
+            </th>
+           
+            <th>
+                Tipo de Usuario
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+          
+            <td>
+                    @{
+                        string userTypeInSpanish = "";
+
+                        if (item.UserType == "manager")
+                        {
+                            userTypeInSpanish = "Gerente";
+                        }
+                        else if (item.UserType == "billClerk")
+                        {
+                            userTypeInSpanish = "Facturista";
+                        }
+                        else if (item.UserType == "salesAdvisor")
+                        {
+                            userTypeInSpanish = "Asesor de Ventas";
+                        }
+
+                        @Html.DisplayFor(modelItem => userTypeInSpanish)
+                    }
+
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserId">Actualizar</a> |
+                <a asp-action="Details" asp-route-id="@item.UserId">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserId">Eliminiar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
